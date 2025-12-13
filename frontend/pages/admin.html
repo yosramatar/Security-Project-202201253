@@ -1,0 +1,275 @@
+
+
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta charset="UTF-8" />
+              <title>Admin – HealthCureAlpha</title>
+              <link rel="stylesheet" href="../css/styles.css" />
+              <script src="../js/auth.js" defer></script>
+              <script src="../js/admin.js" defer></script>
+            </head>
+            <body class="theme-dark">
+              <div class="page-shell">
+                <!-- Top bar -->
+                <header class="top-bar">
+                  <div class="top-bar-left">
+                    <span class="logo-dot"></span>
+                    <div class="brand-text">
+                      <div class="brand-title">ADMIN DASHBOARD</div>
+                      <div class="brand-subtitle">User &amp; role management</div>
+                    </div>
+                  </div>
+                  <div class="top-bar-right">
+                    <span class="user-badge" data-current-user></span>
+                    <button id="theme-toggle" class="btn-ghost">Dark mode</button>
+                    <button id="changePasswordBtn" class="btn-outline">Change password</button>
+                    <button id="logout-btn" class="btn-outline">Logout</button>
+                  </div>
+                </header>
+
+                <!-- Main admin content -->
+                <main class="dashboard">
+                  <!-- Create doctor/nurse form -->
+                  <section class="card" style="margin-bottom:2rem;">
+                    <div class="section-header">
+                      <h2>Create doctor / nurse</h2>
+                    </div>
+                    <form id="createUserForm" class="create-user-form">
+                      <input type="text" id="fullName" placeholder="Full name" required />
+                      <input type="email" id="email" placeholder="user@example.com" required />
+                      <input type="password" id="password" placeholder="Password" required />
+                      <select id="role">
+                        <option value="Doctor">Doctor</option>
+                        <option value="Nurse">Nurse</option>
+                      </select>
+                      <label class="checkbox-label"><input type="checkbox" id="mfaEnabled" checked /> Require MFA for this user</label>
+                      <div id="createUserMessage" class="form-message" aria-live="polite"></div>
+                      <button type="submit" class="btn-primary">Create</button>
+                    </form>
+
+                    <div id="createUserMfa" class="card hidden mfa-box" style="margin-top:1rem; padding:0.75rem;">
+                      <div class="section-header"><h4>Provision MFA</h4></div>
+                      <div class="mfa-secret-row">
+                        <p style="margin:0">MFA secret: <strong data-create-mfa-secret></strong></p>
+                        <button class="copy-btn" data-create-mfa-copy type="button">Copy</button>
+                      </div>
+                      <p style="margin-top:8px"><a data-create-mfa-uri class="btn-small disabled" href="#">Open in authenticator</a></p>
+                    </div>
+                  </section>
+
+                  <!-- Doctors table -->
+                  <section class="card">
+                    <div class="section-header">
+                      <h2>Doctors</h2>
+                    </div>
+                    <table id="doctorsTable" class="data-table">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Status</th>
+                          <th>Watch</th>
+                          <th>MFA</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </section>
+
+                  <!-- Nurses table -->
+                  <section class="card">
+                    <div class="section-header">
+                      <h2>Nurses</h2>
+                    </div>
+                    <table id="nursesTable" class="data-table">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Status</th>
+                          <th>Watch</th>
+                          <th>MFA</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </section>
+
+                  <!-- Patients table -->
+                  <section class="card">
+                    <div class="section-header">
+                      <h2>Patients</h2>
+                    </div>
+                    <table id="patientsTable" class="data-table">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Status</th>
+                          <th>Watch</th>
+                          <th>MFA</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </section>
+
+                  <!-- Security & Audit container -->
+                  <section class="card security-container" style="margin-top:2rem;">
+                    <div class="section-header">
+                      <h2>Security &amp; Audit</h2>
+                    </div>
+                    <div class="security-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                                <!-- SSN Management Card -->
+                                <section class="card">
+                                  <div class="section-header">
+                                    <h3>SSN Management</h3>
+                                    <button id="refreshSsnTable" class="btn-small btn-outline">Refresh</button>
+                                  </div>
+                                  <table id="ssnTable" class="data-table">
+                                    <thead>
+                                      <tr>
+                                        <th>User ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>SSN</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                  </table>
+                                </section>
+                      <!-- Row 1 -->
+                      <section class="card">
+                        <div class="section-header">
+                          <h3>Locked Accounts</h3>
+                          <button id="refreshLockedAccounts" class="btn-small btn-outline">Refresh</button>
+                        </div>
+                        <table id="lockedAccountsTable" class="data-table">
+                          <thead>
+                            <tr>
+                              <th>User</th>
+                              <th>Email</th>
+                              <th>Lockout Until</th>
+                              <th>Failed Attempts</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </section>
+                      <section class="card">
+                        <div class="section-header">
+                          <h3>Session Management</h3>
+                          <button id="refreshSessions" class="btn-small btn-outline">Refresh</button>
+                        </div>
+                        <table id="sessionsTable" class="data-table">
+                          <thead>
+                            <tr>
+                              <th>Session Token</th>
+                              <th>User</th>
+                              <th>IP</th>
+                              <th>User Agent</th>
+                              <th>Created At</th>
+                              <th>Last Seen</th>
+                              <th>Expires At</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </section>
+                      <!-- Row 2 -->
+                      <section class="card">
+                        <div class="section-header">
+                          <h3>Authentication Logs</h3>
+                          <button id="refreshAuthEvents" class="btn-small btn-outline">Refresh</button>
+                        </div>
+                        <table id="authEventsTable" class="data-table">
+                          <thead>
+                            <tr>
+                              <th>Timestamp</th>
+                              <th>User</th>
+                              <th>Event</th>
+                              <th>Detail</th>
+                              <th>IP</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </section>
+                      <section class="card">
+                        <div class="section-header">
+                          <h3>Break-Glass Emergency Access</h3>
+                          <button id="refreshBreakGlass" class="btn-small btn-outline">Refresh</button>
+                        </div>
+                        <table id="breakGlassTable" class="data-table">
+                          <thead>
+                            <tr>
+                              <th>Request ID</th>
+                              <th>User</th>
+                              <th>Reason</th>
+                              <th>Requested At</th>
+                              <th>Status</th>
+                              <th>Approvals</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                        <div class="multi-approval-info">
+                          <strong>Multi-person approval required:</strong> Critical actions (break-glass, key rotation) require at least 2 admin approvals. Approvers are listed in the Approvals column.
+                        </div>
+                      </section>
+                      <!-- Row 3 -->
+                      <section class="card">
+                        <div class="section-header">
+                          <h3>Entitlement Review</h3>
+                          <button id="refreshEntitlementReview" class="btn-small btn-outline">Refresh</button>
+                        </div>
+                        <table id="entitlementReviewTable" class="data-table">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Role</th>
+                              <th>Status</th>
+                              <th>Last Login</th>
+                              <th>Entitlements</th>
+                              <th>Assignments</th>
+                              <th>Orphaned</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </section>
+                      <section class="card">
+                        <div class="section-header">
+                          <h3>Blacklisted Emails</h3>
+                          <button id="refreshBlacklist" class="btn-small btn-outline">Refresh</button>
+                        </div>
+                        <table id="blacklistTable" class="data-table">
+                          <thead>
+                            <tr>
+                              <th>Email</th>
+                              <th>Reason</th>
+                              <th>Blacklisted At</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </section>
+                    </div>
+                  </section>
+                </main>
+              </div>
+            </body>
+            </html>

@@ -1,0 +1,1038 @@
+/* =========================
+   Global + Resets
+   ========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+}
+
+body {
+  color: #e5e7eb;
+  background: radial-gradient(circle at top, #1f2937 0%, #020617 45%, #000 100%);
+  display: flex;
+  flex-direction: column;
+  transition: background 0.4s ease, color 0.3s ease;
+}
+
+/* Light / Dark modes */
+
+body.theme-dark {
+  color: #e5e7eb;
+  background: radial-gradient(circle at top, #111827 0%, #020617 45%, #000 100%);
+}
+
+body.theme-light {
+  color: #0f172a;
+  background: radial-gradient(circle at top, #e5e7eb 0%, #dbeafe 40%, #eff6ff 100%);
+}
+
+/* Prevent selection on sensitive fields (frontend only) */
+.no-copy {
+  user-select: none;
+}
+
+/* =========================
+   Top bar
+   ========================= */
+
+.top-bar {
+  height: 64px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.8),
+    rgba(15, 23, 42, 0.5),
+    rgba(15, 23, 42, 0.8)
+  );
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.6);
+  z-index: 10;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 30%, #22d3ee, #4f46e5);
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.9);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand-title {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+}
+
+.brand-subtitle {
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+/* =========================
+   Centered Auth Layout
+   ========================= */
+
+.center-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 440px;
+  padding: 24px;
+  border-radius: 20px;
+}
+
+/* Glass effect */
+.glass-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow: 0 18px 60px rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle animated border glow */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 180deg,
+    rgba(59, 130, 246, 0.25),
+    rgba(96, 165, 250, 0.3),
+    rgba(56, 189, 248, 0.15),
+    rgba(59, 130, 246, 0.25)
+  );
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  filter: blur(12px);
+  z-index: -1;
+  animation: border-glow 10s linear infinite;
+}
+
+@keyframes border-glow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================
+   Tabs
+   ========================= */
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding: 4px;
+  background: rgba(15, 23, 42, 0.95);
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.tab {
+  flex: 1;
+  border: none;
+  border-radius: 999px;
+  padding: 9px 0;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  color: #cbd5e1;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+}
+
+.tab:hover {
+  transform: translateY(-1px);
+}
+
+.tab.active {
+  background: linear-gradient(120deg, #4f46e5, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.7);
+}
+
+/* Panels */
+
+.panel {
+  display: none;
+  animation: fade-in 0.22s ease-out;
+}
+
+.panel.active {
+  display: block;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   Forms + Inputs
+   ========================= */
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.form-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
+  color: inherit;
+  outline: none;
+  font-size: 14px;
+  transition: border 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+}
+
+input::placeholder {
+  color: rgba(148, 163, 184, 0.8);
+}
+
+input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.9);
+}
+
+/* For light mode background on inputs */
+body.theme-light input[type="email"],
+body.theme-light input[type="password"],
+body.theme-light input[type="text"] {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Password row: input + button */
+
+.password-row {
+  display: flex;
+  gap: 6px;
+}
+
+.password-row input {
+  flex: 1;
+}
+
+/* =========================
+   Buttons
+   ========================= */
+
+button {
+  font-family: inherit;
+}
+
+.btn-primary {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: linear-gradient(120deg, #4f46e5, #6366f1);
+  color: #f9fafb;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 14px 35px rgba(37, 99, 235, 0.8);
+  transition: transform 0.1s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.7);
+}
+
+.btn-outline {
+  border-radius: 999px;
+  padding: 9px 16px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: transparent;
+  color: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(148, 163, 184, 0.12);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.65);
+}
+
+.btn-ghost {
+  border-radius: 999px;
+  padding: 7px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.5);
+  color: #e5e7eb;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(30, 64, 175, 0.7);
+  border-color: rgba(129, 140, 248, 0.8);
+}
+
+.btn-small {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  padding: 6px 10px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #e5e7eb;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Light mode tweaks for top-bar button */
+
+body.theme-light .btn-ghost {
+  background: rgba(255, 255, 255, 0.8);
+  color: #0f172a;
+}
+
+/* Utility */
+
+.full-width {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.muted {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Messages */
+
+.form-message {
+  margin-top: 8px;
+  font-size: 13px;
+  min-height: 18px;
+}
+
+.form-message.error {
+  color: #f97373;
+}
+
+.form-message.success {
+  color: #22c55e;
+}
+
+/* MFA provisioning box */
+.mfa-box {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(148,163,184,0.06);
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.mfa-secret-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.copy-btn {
+  border: none;
+  background: linear-gradient(90deg,#64748b,#334155);
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.copy-btn.copied {
+  background: linear-gradient(90deg,#16a34a,#059669);
+}
+
+.btn-primary.loading,
+.btn-outline.loading,
+.btn-small.loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.mfa-step {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mfa-secret-box {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.mfa-secret-box .label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  margin-right: 6px;
+}
+
+.mfa-secret-box code {
+  font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-weight: 600;
+  font-size: 14px;
+  color: #38bdf8;
+}
+
+.mfa-link {
+  color: #60a5fa;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.mfa-link.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+/* =========================
+   Modal Dialog
+   ========================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(2, 6, 23, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+body.theme-light .modal-overlay {
+  background: rgba(148, 163, 184, 0.32);
+}
+
+.modal-card {
+  width: min(420px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 22px 24px 26px;
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.75);
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-card h2 {
+  margin-bottom: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal-card .form-message {
+  min-height: 20px;
+}
+
+.session-manager {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.session-manager h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.session-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.session-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.session-meta .muted {
+  font-size: 0.85rem;
+}
+
+.session-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.session-actions button,
+.session-actions a {
+  margin: 0;
+}
+.session-actions {
+  justify-content: space-between;
+}
+
+.session-actions-inline {
+  justify-content: flex-end;
+}
+
+.btn-primary.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.btn-primary.loading::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(249, 250, 251, 0.9);
+  border-top-color: transparent;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================
+   Password Strength Meter
+   ========================= */
+
+.pw-meter {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 12px;
+  padding: 8px 10px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.pw-rule {
+  margin: 2px 0;
+}
+
+.pw-valid {
+  color: #22c55e;
+}
+
+.pw-invalid {
+  color: #ef4444;
+}
+
+/* =========================
+   Legacy Layout (dashboards)
+   ========================= */
+/* keep these so admin.html / doctor.html / nurse.html / patient.html still look okay */
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-split {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 24px;
+  padding: 32px;
+}
+
+.hero-panel,
+.auth-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 18px;
+  padding: 18px 18px 20px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.85);
+}
+
+.seed-card h3 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.seed-list {
+  list-style: none;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.seed-list li {
+  margin-bottom: 4px;
+}
+
+.seed-list code {
+  font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+/* User badge (used on dashboards) */
+
+.user-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+/* =========================
+   Light mode adjustments
+   ========================= */
+
+body.theme-light .glass-card,
+body.theme-light .card {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(148, 163, 184, 0.55);
+  box-shadow: 0 18px 50px rgba(148, 163, 184, 0.55);
+}
+
+body.theme-light .top-bar {
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom-color: rgba(148, 163, 184, 0.6);
+  box-shadow: 0 10px 30px rgba(148, 163, 184, 0.5);
+}
+
+body.theme-light .brand-title,
+body.theme-light .brand-subtitle {
+  color: #0f172a;
+}
+
+body.theme-light .tabs {
+  background: rgba(226, 232, 240, 0.98);
+  border-color: rgba(148, 163, 184, 0.7);
+}
+
+body.theme-light .tab {
+  color: #475569;
+}
+
+body.theme-light .pw-meter {
+  background: rgba(248, 250, 252, 0.95);
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 900px) {
+  .content-split {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 16px;
+  }
+
+  .hero-panel,
+  .auth-panel {
+    order: 0;
+  }
+
+  .auth-container {
+    max-width: 420px;
+  }
+
+  .top-bar {
+    padding: 0 16px;
+  }
+}
+
+/* =========================================================
+   🔥 PATCHES ADDED BELOW — DO NOT REMOVE ORIGINAL CODE
+   ========================================================= */
+
+/* === Light mode button fixes === */
+body.theme-light .btn-primary {
+  background: linear-gradient(120deg, #4f46e5, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 14px 35px rgba(37, 99, 235, 0.4);
+}
+
+body.theme-light .btn-outline {
+  background: rgba(255, 255, 255, 0.95);
+  color: #0f172a;
+  border-color: rgba(148, 163, 184, 0.9);
+  box-shadow: 0 10px 24px rgba(148, 163, 184, 0.35);
+}
+
+body.theme-light .btn-small {
+  background: rgba(226, 232, 240, 0.95);
+  color: #0f172a;
+  border-color: rgba(148, 163, 184, 0.9);
+}
+
+body.theme-light .btn-ghost {
+  background: rgba(255, 255, 255, 0.8);
+  color: #0f172a;
+  border-color: rgba(148, 163, 184, 0.8);
+}
+
+/* Better readability for cards in light mode */
+body.theme-light .card {
+  color: #0f172a;
+}
+
+/* Force higher contrast for inputs in light mode */
+body.theme-light input[type="email"],
+body.theme-light input[type="password"],
+body.theme-light input[type="text"] {
+  border-color: rgba(148, 163, 184, 0.6);
+  color: #0f172a;
+}
+
+/* Prevent washed-out colors */
+body.theme-light .form-message.error {
+  color: #dc2626;
+}
+body.theme-light .form-message.success {
+  color: #16a34a;
+}
+/* =========================================================
+   ADMIN / DASHBOARD LAYOUT
+   ========================================================= */
+
+.dashboard {
+  flex: 1;
+  padding: 24px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Create user row */
+.form-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.form-inline input[type="text"],
+.form-inline input[type="email"],
+.form-inline input[type="password"],
+.form-inline select {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* Table styling */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.data-table thead {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+body.theme-light .data-table thead {
+  background: rgba(226, 232, 240, 0.98);
+}
+
+.data-table th,
+.data-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.data-table tbody tr:hover {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+body.theme-light .data-table tbody tr:hover {
+  background: rgba(226, 232, 240, 0.7);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* Danger button used for delete */
+.btn-danger {
+  border-color: rgba(248, 113, 113, 0.9);
+  color: #fecaca;
+}
+
+.btn-danger:hover {
+  background: rgba(248, 113, 113, 0.15);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+  border: 1px solid transparent;
+}
+
+.status-active {
+  background: rgba(34, 197, 94, 0.18);
+  border-color: rgba(34, 197, 94, 0.4);
+  color: #4ade80;
+}
+
+.status-disabled {
+  background: rgba(248, 113, 113, 0.18);
+  border-color: rgba(248, 113, 113, 0.4);
+  color: #f87171;
+}
+
+.status-banned {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.6);
+  color: #fca5a5;
+}
+
+.status-pending {
+  background: rgba(250, 204, 21, 0.2);
+  border-color: rgba(250, 204, 21, 0.4);
+  color: #facc15;
+}
+
+.watch-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+  border: 1px solid transparent;
+}
+
+.watch-normal {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.45);
+  color: #93c5fd;
+}
+
+.watch-yellow {
+  background: rgba(250, 204, 21, 0.16);
+  border-color: rgba(250, 204, 21, 0.35);
+  color: #fbbf24;
+}
+
+.mfa-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.mfa-enabled {
+  background: rgba(96, 165, 250, 0.18);
+  border-color: rgba(96, 165, 250, 0.45);
+  color: #bfdbfe;
+}
+
+.mfa-missing {
+  background: rgba(248, 113, 113, 0.18);
+  border-color: rgba(248, 113, 113, 0.35);
+  color: #fecaca;
+}
+/* Make <select> look like the inputs */
+/* =========================
+   Custom <select> styling
+   ========================= */
+
+/* Base select (dark theme) */
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), #020617);
+  color: inherit;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: border 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+
+  /* Little arrow on the right */
+  background-image:
+    linear-gradient(45deg, #cbd5e1 50%, transparent 50%),
+    linear-gradient(135deg, #cbd5e1 50%, transparent 50%);
+  background-position: calc(100% - 14px) 50%, calc(100% - 9px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 30px; /* space so text doesn't overlap arrow */
+}
+
+select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.9);
+}
+
+/* Light mode version of select */
+body.theme-light select {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(148, 163, 184, 0.6);
+  color: #0f172a;
+}
+
+/* Dropdown options – dark theme */
+select option {
+  background-color: #020617;
+  color: #e5e7eb;
+}
+
+/* Dropdown options – light theme */
+body.theme-light select option {
+  background-color: #ffffff;
+  color: #0f172a;
+}

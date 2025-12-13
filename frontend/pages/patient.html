@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Patient – HealthCureAlpha</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <script src="../js/auth.js" defer></script>
+  <script src="../js/patient.js" defer></script>
+</head>
+<body class="theme-dark">
+  <div class="page-shell">
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <span class="logo-dot"></span>
+        <div class="brand-text">
+          <div class="brand-title">Patient portal</div>
+          <div class="brand-subtitle">Appointments &amp; diagnosis</div>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <span class="user-badge" data-current-user></span>
+        <button id="themeToggle" class="btn-ghost">Dark mode</button>
+        <button id="changePasswordBtn" class="btn-outline">Change password</button>
+        <button id="logoutBtn" class="btn-outline">Logout</button>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <section class="card">
+        <h2>Request appointment</h2>
+        <form id="appointmentForm" class="form-vertical">
+          <label>
+            Doctor
+            <select id="appointmentDoctorId" required>
+              <option value="">Loading…</option>
+            </select>
+          </label>
+          <label>
+            Date &amp; time
+            <input type="datetime-local" id="appointmentDatetime" required />
+          </label>
+          <button type="submit" class="btn-primary full-width">
+            Request appointment
+          </button>
+        </form>
+        <div id="appointmentMessage" class="form-message"></div>
+      </section>
+
+      <section class="card wide">
+        <h2>Your appointments &amp; diagnosis</h2>
+        <div id="patientData">
+          <p class="muted">Loading…</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

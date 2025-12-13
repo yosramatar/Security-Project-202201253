@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HealthCureAlpha – Secure Healthcare Access Portal</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script defer src="../js/auth.js"></script>
+  </head>
+
+  <body class="theme-dark">
+    <!-- Top bar -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <div class="logo-dot"></div>
+        <div class="brand-text">
+          <div class="brand-title">HEALTHCUREALPHA</div>
+          <div class="brand-subtitle">Secure Healthcare Access Portal</div>
+        </div>
+      </div>
+
+      <button id="theme-toggle" class="btn-ghost">Light mode</button>
+    </header>
+
+    <!-- Centered auth card -->
+    <main class="center-wrapper">
+      <section class="auth-container glass-card">
+        <!-- Tabs -->
+        <div class="tabs">
+          <button
+            class="tab active"
+            type="button"
+            data-target="login-panel"
+          >
+            Login
+          </button>
+          <button
+            class="tab"
+            type="button"
+            data-target="signup-panel"
+          >
+            Create Account
+          </button>
+        </div>
+
+        <!-- Login Panel -->
+        <div id="login-panel" class="panel active">
+          <h2>Secure Login</h2>
+          <form id="login-form" class="form-vertical" autocomplete="off">
+            <label>
+              Email
+              <input
+                type="email"
+                id="login-email"
+                placeholder="you@example.com"
+                required
+              />
+            </label>
+
+
+            <label>
+              Password
+              <div class="password-row" style="display:flex;align-items:center;gap:0.5em;">
+                  <input
+                    type="password"
+                    id="login-password"
+                    class="no-copy"
+                    placeholder="Your password"
+                    required
+                    style="flex:1;"
+                  />
+                  <button
+                    type="button"
+                    class="btn-small toggle-password"
+                    data-target="login-password"
+                  >
+                    Show
+                  </button>
+              </div>
+              <div style="text-align:right;margin:0.1em 0 0.2em 0;">
+                <a href="#" id="forgot-password-link" style="color:#4da3ff;font-weight:500;text-decoration:underline;">Forgot password?</a>
+              </div>
+            </label>
+
+            <label style="margin-top:0.2em;">
+              MFA Code
+              <input
+                type="text"
+                id="login-totp"
+                inputmode="numeric"
+                pattern="\d{6}"
+                maxlength="6"
+                placeholder="123456"
+                autocomplete="one-time-code"
+                style="margin-top:0.02em;"
+              />
+            </label>
+
+            <button type="submit" class="btn-primary full-width">
+              Continue
+            </button>
+            <div style="text-align:center;margin:1em 0;">
+              <button type="button" id="oidc-login-btn" class="btn-outline" style="width:100%;">
+                Sign in with SSO
+              </button>
+            </div>
+            <div id="login-message" class="form-message"></div>
+          </form>
+
+          <!-- Password Reset Request Form -->
+          <form id="reset-request-form" class="form-vertical hidden" autocomplete="off">
+            <h3>Request Password Reset</h3>
+            <label>
+              Email
+              <input type="email" id="reset-email" placeholder="you@example.com" required />
+            </label>
+            <button type="submit" class="btn-primary full-width">Request Reset</button>
+            <div style="text-align:center;margin:1em 0;">
+              <a href="#" id="back-to-login-link" class="muted">Back to login</a>
+            </div>
+            <div id="reset-request-message" class="form-message"></div>
+          </form>
+
+          <!-- Password Reset Confirmation Form -->
+          <form id="reset-confirm-form" class="form-vertical hidden" autocomplete="off">
+            <h3>Set New Password</h3>
+            <label>
+              Reset Token
+              <input type="text" id="reset-token" placeholder="Paste reset token" required />
+            </label>
+            <label>
+              New Password
+              <input type="password" id="reset-new-password" placeholder="New password" required />
+            </label>
+            <button type="submit" class="btn-primary full-width">Set Password</button>
+            <div style="text-align:center;margin:1em 0;">
+              <a href="#" id="back-to-login-link2" class="muted">Back to login</a>
+            </div>
+            <div id="reset-confirm-message" class="form-message"></div>
+          </form>
+        </div>
+
+        <!-- Signup Panel -->
+        <div id="signup-panel" class="panel">
+          <h2>Create Patient Account</h2>
+          <form id="signup-form" class="form-vertical" autocomplete="off">
+            <label>
+              Full Name
+              <input
+                type="text"
+                id="signup-name"
+                placeholder="Patient name"
+                required
+              />
+            </label>
+
+            <label>
+              Email
+              <input
+                type="email"
+                id="signup-email"
+                placeholder="patient@example.com"
+                required
+              />
+            </label>
+
+            <label>
+              Password
+              <div class="password-row">
+                <input
+                  type="password"
+                  id="signup-password"
+                  class="no-copy"
+                  placeholder="Strong password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="btn-small toggle-password"
+                  data-target="signup-password"
+                >
+                  Show
+                </button>
+              </div>
+            </label>
+
+            <!-- Live password strength box -->
+            <div class="pw-meter" id="pw-strength">
+              <div class="pw-rule">Minimum 12 characters</div>
+              <div class="pw-rule">One uppercase letter</div>
+              <div class="pw-rule">One lowercase letter</div>
+              <div class="pw-rule">One number</div>
+              <div class="pw-rule">One special symbol</div>
+            </div>
+
+            <label>
+              Confirm Password
+              <div class="password-row">
+                <input
+                  type="password"
+                  id="signup-password-confirm"
+                  class="no-copy"
+                  placeholder="Repeat password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="btn-small toggle-password"
+                  data-target="signup-password-confirm"
+                >
+                  Show
+                </button>
+              </div>
+            </label>
+
+            <button type="submit" class="btn-outline full-width">
+              Create account
+            </button>
+            <div id="signup-message" class="form-message"></div>
+          </form>
+
+          <div id="signup-mfa-container" class="mfa-step hidden">
+            <h3>Step 2: Verify MFA</h3>
+            <p>
+              Scan the secret with your authenticator app (for example Google Authenticator or 1Password) and then enter the six-digit code below.
+            </p>
+            <div class="mfa-secret-box">
+              <div>
+                <span class="label">Secret:</span>
+                <code id="signup-mfa-secret"></code>
+              </div>
+              <div>
+                <span class="label">otpauth URI:</span>
+                <a id="signup-mfa-uri" href="#" target="_blank" rel="noopener" class="mfa-link">Open in authenticator</a>
+              </div>
+            </div>
+            <label>
+              MFA Code
+              <input
+                type="text"
+                id="signup-mfa-code"
+                inputmode="numeric"
+                pattern="\d{6}"
+                maxlength="6"
+                placeholder="123456"
+                autocomplete="one-time-code"
+              />
+            </label>
+            <button type="button" id="signup-mfa-verify" class="btn-primary full-width">
+              Verify &amp; Activate Account
+            </button>
+            <div id="signup-mfa-message" class="form-message"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

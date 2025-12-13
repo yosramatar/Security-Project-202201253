@@ -1,0 +1,9 @@
+{
+  "name": "healthcurealpha-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start:http": "npx http-server . -p 8080",
+    "start:https": "node serve-https.js --cert ../192.168.56.1+2.pem --key ../192.168.56.1+2-key.pem --port 8080"
+  }
+}

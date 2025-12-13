@@ -1,0 +1,766 @@
+{
+  "info": {
+    "name": "HealthCureAlpha Security Smoke",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "patch": 0
+    }
+  },
+  "item": [
+    {
+      "name": "Root should deny",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Server should respond with 404 for root path', function () {",
+              "  pm.response.to.have.status(404);",
+              "});",
+              "",
+              "pm.test('Response should not leak stack traces', function () {",
+              "  pm.expect(pm.response.text()).to.not.include('Error:');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Login requires MFA",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@healthcurealpha.com\",\n  \"password\": \"Admin#2025!\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Login without MFA is rejected', function () {",
+              "  pm.response.to.have.status(400);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Login wrong MFA code",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@healthcurealpha.com\",\n  \"password\": \"Admin#2025!\",\n  \"totpCode\": \"000000\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Invalid MFA returns 401', function () {",
+              "  pm.response.to.have.status(401);",
+              "  const body = pm.response.json();",
+              "  pm.expect(body.error).to.include('MFA');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin login success",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@healthcurealpha.com\",\n  \"password\": \"Admin#2025!\",\n  \"totpCode\": \"{{adminTotp}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "function base32ToHex(base32) {",
+              "  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';",
+              "  let bits = '';",
+              "  let hex = '';",
+              "  const cleaned = base32.replace(/=+$/, '').toUpperCase();",
+              "  for (let i = 0; i < cleaned.length; i++) {",
+              "    const val = alphabet.indexOf(cleaned.charAt(i));",
+              "    if (val < 0) {",
+              "      continue;",
+              "    }",
+              "    bits += val.toString(2).padStart(5, '0');",
+              "  }",
+              "  for (let j = 0; j + 4 <= bits.length; j += 4) {",
+              "    const chunk = bits.substring(j, j + 4);",
+              "    hex += parseInt(chunk, 2).toString(16);",
+              "  }",
+              "  return hex;",
+              "}",
+              "",
+              "function generateTotp(secret) {",
+              "  const key = base32ToHex(secret);",
+              "  const epoch = Math.floor(Date.now() / 1000);",
+              "  const time = Math.floor(epoch / 30).toString(16).padStart(16, '0');",
+              "  const hmac = CryptoJS.HmacSHA1(CryptoJS.enc.Hex.parse(time), CryptoJS.enc.Hex.parse(key));",
+              "  const hmacHex = hmac.toString(CryptoJS.enc.Hex);",
+              "  const offset = parseInt(hmacHex.substring(hmacHex.length - 1), 16);",
+              "  const binary = parseInt(hmacHex.substr(offset * 2, 8), 16) & 0x7fffffff;",
+              "  const otp = (binary % 1000000).toString().padStart(6, '0');",
+              "  return otp;",
+              "}",
+              "",
+              "const secret = pm.collectionVariables.get('adminSecret');",
+              "const totp = generateTotp(secret);",
+              "pm.variables.set('adminTotp', totp);"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Admin login succeeded', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const data = pm.response.json();",
+              "  pm.expect(data).to.have.property('token');",
+              "  pm.collectionVariables.set('adminToken', data.token);",
+              "  if (data.userId) {",
+              "    pm.collectionVariables.set('adminUserId', data.userId);",
+              "  }",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin list key users",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "users"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Fetched users for lookups', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.users).to.be.an('array');",
+              "  const doc1 = json.users.find(u => u.email === 'doc1@healthcurealpha.com');",
+              "  pm.expect(doc1, 'doc1 entry').to.exist;",
+              "  pm.collectionVariables.set('doc1Id', doc1.id);",
+              "  const nurse1 = json.users.find(u => u.email === 'nurse1@healthcurealpha.com');",
+              "  pm.expect(nurse1, 'nurse1 entry').to.exist;",
+              "  pm.collectionVariables.set('nurse1Id', nurse1.id);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin ban doc1",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": {{doc1Id}}\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/ban-user",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "ban-user"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Admin ban user succeeded', function () {",
+              "  pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Banned doctor login blocked",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"doc1@healthcurealpha.com\",\n  \"password\": \"Doctor#2025!\",\n  \"totpCode\": \"000000\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Banned account returns 403', function () {",
+              "  pm.response.to.have.status(403);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin unban doc1",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": {{doc1Id}}\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/unban-user",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "unban-user"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Admin unban user succeeded', function () {",
+              "  pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Nurse wrong password attempt 1",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"nurse1@healthcurealpha.com\",\n  \"password\": \"Wrong#Pass1\",\n  \"totpCode\": \"000000\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('First bad login rejected', function () {",
+              "  pm.response.to.have.status(401);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Nurse wrong password attempt 2",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"nurse1@healthcurealpha.com\",\n  \"password\": \"Wrong#Pass2\",\n  \"totpCode\": \"000000\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Second bad login rejected', function () {",
+              "  pm.response.to.have.status(401);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Nurse wrong password attempt 3",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"nurse1@healthcurealpha.com\",\n  \"password\": \"Wrong#Pass3\",\n  \"totpCode\": \"000000\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Third bad login still rejected', function () {",
+              "  pm.response.to.have.status(401);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin verify nurse yellowlist",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/users?role=nurse",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "users"
+          ],
+          "query": [
+            {
+              "key": "role",
+              "value": "nurse"
+            }
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Nurse flagged as yellow', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  const nurse = (json.users || []).find(u => u.email === 'nurse1@healthcurealpha.com');",
+              "  pm.expect(nurse, 'nurse1 entry').to.exist;",
+              "  pm.expect(nurse.watch_status).to.eql('yellow');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin clear nurse yellow flag",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": {{nurse1Id}}\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/clear-yellow",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "clear-yellow"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Yellow flag cleared', function () {",
+              "  pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin verify nurse cleared",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/users?role=nurse",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "users"
+          ],
+          "query": [
+            {
+              "key": "role",
+              "value": "nurse"
+            }
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Nurse watch status reset', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const json = pm.response.json();",
+              "  const nurse = (json.users || []).find(u => u.email === 'nurse1@healthcurealpha.com');",
+              "  pm.expect(nurse, 'nurse1 entry').to.exist;",
+              "  pm.expect(nurse.watch_status).to.eql('normal');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Nurse login success after clear",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"nurse1@healthcurealpha.com\",\n  \"password\": \"Nurse#2025!\",\n  \"totpCode\": \"{{nurseTotp}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "function base32ToHex(base32) {",
+              "  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';",
+              "  let bits = '';",
+              "  let hex = '';",
+              "  const cleaned = base32.replace(/=+$/, '').toUpperCase();",
+              "  for (let i = 0; i < cleaned.length; i++) {",
+              "    const val = alphabet.indexOf(cleaned.charAt(i));",
+              "    if (val < 0) {",
+              "      continue;",
+              "    }",
+              "    bits += val.toString(2).padStart(5, '0');",
+              "  }",
+              "  for (let j = 0; j + 4 <= bits.length; j += 4) {",
+              "    const chunk = bits.substring(j, j + 4);",
+              "    hex += parseInt(chunk, 2).toString(16);",
+              "  }",
+              "  return hex;",
+              "}",
+              "",
+              "function generateTotp(secret) {",
+              "  const key = base32ToHex(secret);",
+              "  const epoch = Math.floor(Date.now() / 1000);",
+              "  const time = Math.floor(epoch / 30).toString(16).padStart(16, '0');",
+              "  const hmac = CryptoJS.HmacSHA1(CryptoJS.enc.Hex.parse(time), CryptoJS.enc.Hex.parse(key));",
+              "  const hmacHex = hmac.toString(CryptoJS.enc.Hex);",
+              "  const offset = parseInt(hmacHex.substring(hmacHex.length - 1), 16);",
+              "  const binary = parseInt(hmacHex.substr(offset * 2, 8), 16) & 0x7fffffff;",
+              "  const otp = (binary % 1000000).toString().padStart(6, '0');",
+              "  return otp;",
+              "}",
+              "",
+              "const secret = pm.collectionVariables.get('nurse1Secret');",
+              "const totp = generateTotp(secret);",
+              "pm.variables.set('nurseTotp', totp);"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Nurse login succeeds after reset', function () {",
+              "  pm.response.to.have.status(200);",
+              "  const data = pm.response.json();",
+              "  pm.expect(data.watchStatus).to.eql('normal');",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "adminSecret",
+      "value": "JBSWY3DPEHPK3PXP"
+    },
+    {
+      "key": "nurse1Secret",
+      "value": "NB2W45DFOJQXGZJT"
+    },
+    {
+      "key": "adminToken",
+      "value": ""
+    },
+    {
+      "key": "adminUserId",
+      "value": ""
+    },
+    {
+      "key": "doc1Id",
+      "value": ""
+    },
+    {
+      "key": "nurse1Id",
+      "value": ""
+    }
+  ]
+}
