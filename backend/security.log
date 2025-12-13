@@ -1,0 +1,227 @@
+{"ts":"2025-12-01T22:31:28.953Z","eventType":"LOGIN_FAILURE","userId":3,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-01T22:31:30.907Z","eventType":"LOGIN_FAILURE","userId":3,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-01T22:31:32.742Z","eventType":"LOGIN_FAILURE","userId":3,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-01T22:31:34.777Z","eventType":"LOGIN_FAILURE","userId":3,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-01T22:31:36.936Z","eventType":"LOGIN_FAILURE","userId":3,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-01T22:31:38.406Z","eventType":"LOGIN_LOCKED","userId":null,"role":null,"ip":"::1","detail":"doc2@healthcurealpha.com"}
+{"ts":"2025-12-01T22:31:43.982Z","eventType":"LOGIN_LOCKED","userId":null,"role":null,"ip":"::1","detail":"doc2@healthcurealpha.com"}
+{"ts":"2025-12-01T23:31:51.347Z","eventType":"LOGIN_SUCCESS","userId":1,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T11:27:19.954Z","eventType":"LOGIN_SUCCESS","userId":1,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T11:28:37.079Z","eventType":"LOGIN_SUCCESS","userId":1,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T15:22:59.789Z","eventType":"LOGIN_FAILURE","userId":1,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T15:23:11.142Z","eventType":"LOGIN_FAILURE","userId":1,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T15:23:29.363Z","eventType":"LOGIN_FAILURE","userId":2,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T16:45:24.279Z","eventType":"LOGIN_FAILURE","userId":2,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T16:45:40.649Z","eventType":"LOGIN_FAILURE","userId":1,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T16:45:41.397Z","eventType":"LOGIN_FAILURE","userId":1,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T16:45:42.029Z","eventType":"LOGIN_FAILURE","userId":1,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T16:54:29.731Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T17:05:59.501Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T17:05:59.568Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-02T17:05:59.569Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-02T17:05:59.570Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-02T17:06:44.460Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T17:06:44.512Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-02T17:06:44.513Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-02T17:06:44.514Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-02T17:07:09.045Z","eventType":"LOGIN_FAILURE","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T17:07:11.697Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T17:07:11.751Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-02T17:07:11.754Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-02T17:07:11.754Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-02T17:08:22.197Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T18:09:53.067Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:01:26.413Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:02:13.531Z","eventType":"ADMIN_CREATE_USER","userId":8,"role":"admin","ip":null,"detail":"Created nurse with id=12"}
+{"ts":"2025-12-02T20:02:51.451Z","eventType":"ADMIN_DELETE_USER","userId":8,"role":"admin","ip":null,"detail":"Deleted user id=12, role=nurse"}
+{"ts":"2025-12-02T20:02:56.272Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-02T20:03:46.597Z","eventType":"LOGIN_FAILURE","userId":null,"role":null,"ip":"::1","detail":"AbdallaSoliman2808@gmail.com"}
+{"ts":"2025-12-02T20:04:03.659Z","eventType":"LOGIN_SUCCESS","userId":13,"role":"patient","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:04:32.788Z","eventType":"LOGOUT","userId":13,"role":"patient","ip":null,"detail":""}
+{"ts":"2025-12-02T20:04:49.661Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:05:54.769Z","eventType":"ADMIN_CREATE_USER","userId":8,"role":"admin","ip":null,"detail":"Created doctor with id=14"}
+{"ts":"2025-12-02T20:05:58.585Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-02T20:06:09.651Z","eventType":"LOGIN_SUCCESS","userId":14,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:06:44.311Z","eventType":"LOGOUT","userId":14,"role":"doctor","ip":null,"detail":""}
+{"ts":"2025-12-02T20:07:47.044Z","eventType":"LOGIN_FAILURE","userId":11,"role":"patient","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:08:07.430Z","eventType":"LOGIN_FAILURE","userId":11,"role":"patient","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:08:23.151Z","eventType":"LOGIN_FAILURE","userId":11,"role":"patient","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:09:03.506Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:09:18.143Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-02T20:09:36.840Z","eventType":"LOGIN_FAILURE","userId":11,"role":"patient","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:10:26.467Z","eventType":"LOGIN_FAILURE","userId":11,"role":"patient","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:10:58.932Z","eventType":"LOGIN_SUCCESS","userId":13,"role":"patient","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:14:10.383Z","eventType":"LOGIN_FAILURE","userId":null,"role":null,"ip":"::1","detail":"abdallasoliman@gmail.com"}
+{"ts":"2025-12-02T20:14:21.747Z","eventType":"LOGIN_SUCCESS","userId":13,"role":"patient","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:14:32.543Z","eventType":"PATIENT_APPLY_APPOINTMENT","userId":13,"role":"patient","ip":null,"detail":"Appointment id=1 with doctor id=9"}
+{"ts":"2025-12-02T20:14:35.882Z","eventType":"LOGOUT","userId":13,"role":"patient","ip":null,"detail":""}
+{"ts":"2025-12-02T20:15:06.576Z","eventType":"LOGIN_FAILURE","userId":9,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:15:42.890Z","eventType":"LOGIN_FAILURE","userId":9,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:21:33.971Z","eventType":"LOGIN_FAILURE","userId":9,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:21:39.059Z","eventType":"LOGIN_FAILURE","userId":9,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:26:51.310Z","eventType":"LOGIN_FAILURE","userId":9,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:56:34.484Z","eventType":"LOGIN_FAILURE","userId":9,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:56:54.080Z","eventType":"LOGIN_FAILURE","userId":9,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:57:09.873Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:57:20.075Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-02T20:57:26.864Z","eventType":"LOGIN_SUCCESS","userId":14,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:57:31.067Z","eventType":"LOGOUT","userId":14,"role":"doctor","ip":null,"detail":""}
+{"ts":"2025-12-02T20:57:51.872Z","eventType":"LOGIN_SUCCESS","userId":13,"role":"patient","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:58:00.357Z","eventType":"PATIENT_APPLY_APPOINTMENT","userId":13,"role":"patient","ip":null,"detail":"Appointment id=2 with doctor id=14"}
+{"ts":"2025-12-02T20:58:02.670Z","eventType":"LOGOUT","userId":13,"role":"patient","ip":null,"detail":""}
+{"ts":"2025-12-02T20:58:28.973Z","eventType":"LOGIN_FAILURE","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:58:36.482Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:58:43.284Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-02T20:58:47.938Z","eventType":"LOGIN_SUCCESS","userId":14,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T20:59:08.139Z","eventType":"LOGOUT","userId":14,"role":"doctor","ip":null,"detail":""}
+{"ts":"2025-12-02T21:00:09.809Z","eventType":"LOGIN_SUCCESS","userId":14,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T21:00:19.295Z","eventType":"DOCTOR_WRITE_DIAGNOSIS","userId":14,"role":"doctor","ip":null,"detail":"Appointment id=2"}
+{"ts":"2025-12-02T21:00:28.855Z","eventType":"LOGOUT","userId":14,"role":"doctor","ip":null,"detail":""}
+{"ts":"2025-12-02T21:00:46.687Z","eventType":"LOGIN_FAILURE","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T21:00:51.341Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T21:01:25.889Z","eventType":"ADMIN_CREATE_USER","userId":8,"role":"admin","ip":null,"detail":"Created nurse with id=15"}
+{"ts":"2025-12-02T21:01:30.239Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-02T21:01:38.245Z","eventType":"LOGIN_SUCCESS","userId":15,"role":"nurse","ip":"::1","detail":""}
+{"ts":"2025-12-02T21:01:58.716Z","eventType":"LOGOUT","userId":15,"role":"nurse","ip":null,"detail":""}
+{"ts":"2025-12-02T21:09:31.911Z","eventType":"LOGIN_SUCCESS","userId":14,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-02T21:09:46.838Z","eventType":"DOCTOR_WRITE_DIAGNOSIS","userId":14,"role":"doctor","ip":null,"detail":"Appointment id=2"}
+{"ts":"2025-12-02T21:09:54.185Z","eventType":"LOGOUT","userId":14,"role":"doctor","ip":null,"detail":""}
+{"ts":"2025-12-02T21:10:11.946Z","eventType":"LOGIN_FAILURE","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T21:10:17.806Z","eventType":"LOGIN_FAILURE","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T21:10:22.421Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T21:10:32.160Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-02T21:54:08.918Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-02T21:54:17.137Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-10T22:38:00.481Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-10T22:57:49.420Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-10T23:38:14.109Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-10T23:38:22.289Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-10T23:38:44.322Z","eventType":"LOGIN_FAILURE_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-10T23:38:46.473Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-10T23:39:27.490Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-11T00:10:01.058Z","eventType":"LOGIN_FAILURE_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T00:10:01.523Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T00:10:01.706Z","eventType":"ADMIN_BAN_USER","userId":8,"role":"admin","ip":null,"detail":"Banned user id=9"}
+{"ts":"2025-12-11T00:10:01.783Z","eventType":"LOGIN_BLOCKED_BANNED","userId":9,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-11T00:10:01.874Z","eventType":"ADMIN_UNBAN_USER","userId":8,"role":"admin","ip":null,"detail":"Unbanned user id=9"}
+{"ts":"2025-12-11T00:10:02.366Z","eventType":"LOGIN_FAILURE","userId":10,"role":"nurse","ip":"::1","detail":""}
+{"ts":"2025-12-11T00:10:02.805Z","eventType":"LOGIN_FAILURE","userId":10,"role":"nurse","ip":"::1","detail":""}
+{"ts":"2025-12-11T00:10:03.268Z","eventType":"LOGIN_FAILURE","userId":10,"role":"nurse","ip":"::1","detail":""}
+{"ts":"2025-12-11T00:10:03.279Z","eventType":"USER_YELLOWLISTED","userId":10,"role":null,"ip":"::1","detail":"nurse1@healthcurealpha.com"}
+{"ts":"2025-12-11T00:10:03.414Z","eventType":"ADMIN_CLEAR_YELLOW","userId":8,"role":"admin","ip":null,"detail":"Cleared yellow flag for user id=10"}
+{"ts":"2025-12-11T00:10:03.942Z","eventType":"LOGIN_SUCCESS","userId":10,"role":"nurse","ip":"::1","detail":""}
+{"ts":"2025-12-11T10:52:52.989Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T10:53:22.578Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-11T11:02:23.816Z","eventType":"LOGIN_FAILURE_MFA","userId":8,"role":"admin","ip":"::ffff:127.0.0.1","detail":""}
+{"ts":"2025-12-11T11:02:24.673Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::ffff:127.0.0.1","detail":""}
+{"ts":"2025-12-11T11:02:24.995Z","eventType":"ADMIN_BAN_USER","userId":8,"role":"admin","ip":null,"detail":"Banned user id=9"}
+{"ts":"2025-12-11T11:02:25.087Z","eventType":"LOGIN_BLOCKED_BANNED","userId":9,"role":"doctor","ip":"::ffff:127.0.0.1","detail":""}
+{"ts":"2025-12-11T11:02:25.206Z","eventType":"ADMIN_UNBAN_USER","userId":8,"role":"admin","ip":null,"detail":"Unbanned user id=9"}
+{"ts":"2025-12-11T11:02:25.903Z","eventType":"LOGIN_FAILURE","userId":10,"role":"nurse","ip":"::ffff:127.0.0.1","detail":""}
+{"ts":"2025-12-11T11:02:26.735Z","eventType":"LOGIN_FAILURE","userId":10,"role":"nurse","ip":"::ffff:127.0.0.1","detail":""}
+{"ts":"2025-12-11T11:02:27.532Z","eventType":"LOGIN_FAILURE","userId":10,"role":"nurse","ip":"::ffff:127.0.0.1","detail":""}
+{"ts":"2025-12-11T11:02:27.546Z","eventType":"USER_YELLOWLISTED","userId":10,"role":null,"ip":"::ffff:127.0.0.1","detail":"nurse1@healthcurealpha.com"}
+{"ts":"2025-12-11T11:02:27.753Z","eventType":"ADMIN_CLEAR_YELLOW","userId":8,"role":"admin","ip":null,"detail":"Cleared yellow flag for user id=10"}
+{"ts":"2025-12-11T11:02:28.675Z","eventType":"LOGIN_SUCCESS","userId":10,"role":"nurse","ip":"::ffff:127.0.0.1","detail":""}
+{"ts":"2025-12-11T15:20:12.556Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T15:20:29.479Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-11T15:38:35.571Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T18:30:59.136Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T18:34:06.184Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-11T18:36:25.532Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T18:41:17.419Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T18:59:43.172Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-11T19:01:34.641Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-11T19:04:50.096Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T19:23:47.905Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-11T19:41:05.127Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T20:45:39.260Z","eventType":"SERVER_ERROR","userId":null,"role":null,"ip":null,"detail":"loginAttempts is not defined"}
+{"ts":"2025-12-11T20:49:11.629Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T20:49:38.628Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-11T20:50:20.155Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T21:02:32.644Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-11T21:03:03.963Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:02:36.281Z","eventType":"LOGIN_FAILURE_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:02:37.988Z","eventType":"LOGIN_FAILURE_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:03:23.631Z","eventType":"LOGIN_FAILURE_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:03:23.649Z","eventType":"USER_YELLOWLISTED","userId":8,"role":null,"ip":"::1","detail":"admin@healthcurealpha.com"}
+{"ts":"2025-12-11T23:03:24.927Z","eventType":"LOGIN_FAILURE_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:07:29.948Z","eventType":"LOGIN_BLOCKED_NO_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:12:22.523Z","eventType":"LOGIN_BLOCKED_NO_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:16:01.928Z","eventType":"LOGIN_BLOCKED_NO_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:29:43.674Z","eventType":"LOGIN_BLOCKED_NO_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:40:29.056Z","eventType":"LOGIN_BLOCKED_NO_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:44:04.214Z","eventType":"LOGIN_BLOCKED_NO_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:44:18.953Z","eventType":"LOGIN_BLOCKED_NO_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:50:39.692Z","eventType":"LOGIN_BLOCKED_NO_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:51:05.553Z","eventType":"LOGIN_BLOCKED_NO_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:54:44.785Z","eventType":"LOGIN_BLOCKED_NO_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:55:00.032Z","eventType":"LOGIN_BLOCKED_NO_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-11T23:57:03.503Z","eventType":"LOGIN_FAILURE_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T00:03:19.904Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T00:03:56.219Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T00:04:21.897Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T00:04:45.373Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T00:05:13.394Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T00:05:25.866Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T00:11:49.601Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T00:11:59.064Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T00:20:12.613Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T00:20:21.722Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T00:24:33.680Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T00:25:12.434Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T00:49:04.848Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T00:49:28.503Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T00:50:04.196Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T00:50:11.354Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T00:59:35.068Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T00:59:45.640Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T01:02:34.622Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T01:02:46.823Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T12:54:53.424Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::ffff:192.168.1.28","detail":""}
+{"ts":"2025-12-12T12:55:10.141Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T13:02:14.740Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::ffff:192.168.1.28","detail":""}
+{"ts":"2025-12-12T13:02:20.567Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T13:04:36.935Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::ffff:192.168.1.28","detail":""}
+{"ts":"2025-12-12T13:04:40.378Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T13:06:54.146Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::ffff:192.168.1.28","detail":""}
+{"ts":"2025-12-12T13:06:59.977Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T13:10:35.798Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::ffff:192.168.1.28","detail":""}
+{"ts":"2025-12-12T13:10:44.703Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T13:18:12.755Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::ffff:192.168.1.28","detail":""}
+{"ts":"2025-12-12T13:18:23.036Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T13:32:45.524Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::ffff:192.168.1.28","detail":""}
+{"ts":"2025-12-12T13:32:52.825Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T19:49:46.106Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T20:33:57.165Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T21:08:47.812Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T21:09:08.502Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T21:25:33.921Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T21:26:02.778Z","eventType":"LOGIN_FAILURE_MFA","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T21:26:09.209Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T21:26:23.454Z","eventType":"REFRESH_TOKEN_ROTATED","userId":8,"role":null,"ip":null,"detail":""}
+{"ts":"2025-12-12T22:07:59.547Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T22:17:44.760Z","eventType":"ADMIN_BAN_USER","userId":8,"role":"admin","ip":null,"detail":"Banned user id=16"}
+{"ts":"2025-12-12T22:18:05.473Z","eventType":"ADMIN_UNBAN_USER","userId":8,"role":"admin","ip":null,"detail":"Unbanned user id=16"}
+{"ts":"2025-12-12T22:18:14.712Z","eventType":"ADMIN_RESTORE_USER","userId":8,"role":"admin","ip":null,"detail":"Restored user id=9, role=doctor"}
+{"ts":"2025-12-12T22:18:16.260Z","eventType":"ADMIN_RESTORE_USER","userId":8,"role":"admin","ip":null,"detail":"Restored user id=16, role=doctor"}
+{"ts":"2025-12-12T22:38:30.137Z","eventType":"ADMIN_CREATE_USER","userId":8,"role":"admin","ip":null,"detail":"Created doctor with id=19"}
+{"ts":"2025-12-12T22:38:39.357Z","eventType":"LOGOUT","userId":8,"role":"admin","ip":null,"detail":""}
+{"ts":"2025-12-12T22:39:07.956Z","eventType":"LOGIN_FAILURE_MFA","userId":19,"role":"doctor","ip":"::1","detail":""}
+{"ts":"2025-12-12T22:43:05.059Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-12T22:43:12.008Z","eventType":"ADMIN_BAN_USER","userId":8,"role":"admin","ip":null,"detail":"Banned user id=19"}
+{"ts":"2025-12-12T22:43:13.324Z","eventType":"ADMIN_UNBAN_USER","userId":8,"role":"admin","ip":null,"detail":"Unbanned user id=19"}
+{"ts":"2025-12-12T22:43:15.409Z","eventType":"ADMIN_RESTORE_USER","userId":8,"role":"admin","ip":null,"detail":"Restored user id=19, role=doctor"}
+{"ts":"2025-12-12T23:21:22.395Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-13T17:36:22.643Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-13T17:36:28.933Z","eventType":"ADMIN_BAN_USER","userId":8,"role":"admin","ip":null,"detail":"Banned user id=19"}
+{"ts":"2025-12-13T17:36:45.383Z","eventType":"ADMIN_UNBAN_USER","userId":8,"role":"admin","ip":null,"detail":"Unbanned user id=19"}
+{"ts":"2025-12-13T17:36:46.545Z","eventType":"ADMIN_RESTORE_USER","userId":8,"role":"admin","ip":null,"detail":"Restored user id=19, role=doctor"}
+{"ts":"2025-12-13T17:53:54.784Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-13T18:08:44.404Z","eventType":"ADMIN_CREATE_USER","userId":8,"role":"admin","ip":null,"detail":"Created nurse with id=20"}
+{"ts":"2025-12-13T18:40:13.251Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-13T20:11:09.598Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-13T20:11:09.614Z","eventType":"UNAUTHORIZED_ACCESS","userId":null,"role":null,"ip":null,"detail":"Missing or invalid session token"}
+{"ts":"2025-12-13T20:11:43.912Z","eventType":"LOGIN_SUCCESS","userId":8,"role":"admin","ip":"::1","detail":""}
+{"ts":"2025-12-13T20:14:11.051Z","eventType":"ADMIN_SET_MFA","userId":8,"role":null,"ip":null,"detail":"Disabled MFA for 16"}
+{"ts":"2025-12-13T20:14:12.079Z","eventType":"ADMIN_SET_MFA","userId":8,"role":null,"ip":null,"detail":"Enabled MFA for 16"}
