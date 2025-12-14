@@ -259,11 +259,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderMfaBadge(user) {
     const checked = user.mfa_enabled ? 'checked' : '';
+    const secretHtml = user.mfaSecret ? `<div class="mfa-secret" style="margin-top:6px; font-size:12px"><code>${user.mfaSecret}</code></div>` : '';
+    const linkHtml = user.otpauthUrl ? `<div style="margin-top:6px"><a class="btn-small" href="${user.otpauthUrl}" target="_blank" rel="noopener">Open in authenticator</a></div>` : '';
     return `
-      <label class="checkbox-label">
-        <input type="checkbox" data-mfa-toggle="${user.id}" ${checked} />
-        <span style="font-size:12px; margin-left:6px">MFA</span>
-      </label>
+      <div>
+        <label class="checkbox-label">
+          <input type="checkbox" data-mfa-toggle="${user.id}" ${checked} />
+          <span style="font-size:12px; margin-left:6px">MFA</span>
+        </label>
+        ${secretHtml}
+        ${linkHtml}
+      </div>
     `;
   }
 
@@ -290,7 +296,9 @@ document.addEventListener("DOMContentLoaded", () => {
       buttons.push(`<button type="button" class="btn-small" data-clear-yellow-id="${user.id}">Clear Watch</button>`);
     }
 
-    return buttons.join(" ");
+    // If MFA secret available, show it alongside actions for quick provisioning
+    const secretHtml = user.mfaSecret ? `<div class="mfa-secret-inline" style="margin-top:6px; font-size:12px"><code>${user.mfaSecret}</code></div>` : '';
+    return buttons.join(" ") + secretHtml;
   }
 
   function showCreateMfa(secret, uri) {

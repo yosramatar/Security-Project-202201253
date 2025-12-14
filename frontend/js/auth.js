@@ -120,7 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
           if (data.sessions && data.sessions.length) {
             // Use first session for now
             const session = data.sessions.find(s => s.current) || data.sessions[0];
+            // Store token and session metadata
             localStorage.setItem("hc_token", token);
+            // If backend provided a CSRF token (useful after OIDC flows), store it
+            if (data.csrfToken) localStorage.setItem("hc_csrf", data.csrfToken);
             localStorage.setItem("hc_role", session.role || "");
             localStorage.setItem("hc_name", session.name || "");
             localStorage.setItem("hc_userId", session.userId || "");
@@ -143,7 +146,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 // frontend/js/auth.js
 
-const API_ORIGIN = "http://localhost:3000";
+// Determine API origin:
+// - If frontend is served on port 8080 (local static server) assume backend runs on https://localhost:3000
+// - Otherwise use the page origin so HTTPS pages call HTTPS backend on same origin
+const API_ORIGIN = (typeof window !== 'undefined' && window.location && window.location.origin)
+  ? (window.location.hostname === 'localhost' && window.location.port === '8080' ? 'https://localhost:3000' : window.location.origin)
+  : 'http://localhost:3000';
 const API_BASE = `${API_ORIGIN}/api`;
 const SESSION_IDLE_TIMEOUT_MS = 30 * 60 * 1000; // must align with backend
 
@@ -269,7 +277,26 @@ async function apiFetch(path, options = {}) {
   }
   }
 
-  let response = await fetch(url, { ...options, headers });
+  let response;
+  try {
+    response = await fetch(url, { ...options, headers });
+  } catch (err) {
+    // Browser/network error (could be SSL when backend isn't serving TLS).
+    // In local dev, if the API origin is localhost over HTTPS, retry over HTTP.
+    try {
+      const isLocalHttps = /^https:\/\/localhost(:|$)/i.test(url) || /^https:\/\/localhost(:|$)/i.test(API_ORIGIN);
+      if (isLocalHttps) {
+        const fallbackUrl = url.replace(/^https:/i, "http:");
+        console.warn("apiFetch: HTTPS request failed, retrying over HTTP:", fallbackUrl, err);
+        response = await fetch(fallbackUrl, { ...options, headers });
+      } else {
+        throw err;
+      }
+    } catch (err2) {
+      // Rethrow the original error for clarity
+      throw err;
+    }
+  }
   // If session expired, try refresh
   if ((response.status === 401 || response.status === 403) && session.refreshToken) {
     // Try refresh

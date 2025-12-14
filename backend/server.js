@@ -1427,7 +1427,9 @@ async function handleListOwnSessions(req, res, session) {
     userAgent: row.user_agent,
     current: session.token === row.token,
   }));
-  return sendJson(res, 200, { sessions: formatted });
+  // Include a CSRF token derived from the user id so the frontend can include it
+  const csrfToken = crypto.createHmac('sha256', CSRF_SECRET).update(String(session.userId)).digest('hex');
+  return sendJson(res, 200, { sessions: formatted, csrfToken });
 }
 
 async function handleRevokeOwnSessions(req, res, session) {
@@ -1932,18 +1934,46 @@ async function handleAdminListUsers(req, res, session, query) {
     let rows;
     if (role) {
       const stmt = db.prepare(
-        `SELECT id, email, name, role, status, watch_status, failed_login_count, mfa_enabled, yellowlisted_at
+        `SELECT id, email, name, role, status, watch_status, failed_login_count, mfa_enabled, yellowlisted_at, mfa_secret
          FROM users WHERE role = ? ORDER BY id ASC`
       );
       rows = stmt.all(role);
     } else {
       const stmt = db.prepare(
-        `SELECT id, email, name, role, status, watch_status, failed_login_count, mfa_enabled, yellowlisted_at
+        `SELECT id, email, name, role, status, watch_status, failed_login_count, mfa_enabled, yellowlisted_at, mfa_secret
          FROM users ORDER BY id ASC`
       );
       rows = stmt.all();
     }
-    return sendJson(res, 200, { users: rows });
+
+    // Decrypt MFA secrets for admin display. Only admins hit this endpoint (requireRole above).
+    const users = rows.map(r => {
+      let plainSecret = null;
+      try {
+        if (r.mfa_secret) {
+          plainSecret = decryptText(r.mfa_secret) || null;
+        }
+      } catch (e) {
+        console.error('Failed to decrypt MFA secret for user', r.id, e);
+        plainSecret = null;
+      }
+      return {
+        id: r.id,
+        email: r.email,
+        name: r.name,
+        role: r.role,
+        status: r.status,
+        watch_status: r.watch_status,
+        failed_login_count: r.failed_login_count,
+        mfa_enabled: r.mfa_enabled,
+        yellowlisted_at: r.yellowlisted_at,
+        mfaSecret: plainSecret,
+        // provide an otpauth URL so admins can open in an authenticator if desired
+        otpauthUrl: plainSecret ? generateTotpUri(r.email, plainSecret) : null,
+      };
+    });
+
+    return sendJson(res, 200, { users });
   } catch (e) {
     console.error(e);
     return sendJson(res, 500, { error: "Server error" });
@@ -2125,9 +2155,10 @@ async function handleDoctorAppointments(req, res, session) {
 }
 
 // Doctor writes diagnosis (notes encrypted)
-async function handleDoctorWriteDiagnosis(req, res, session) {
+// Accept an optional `providedBody` to avoid re-reading the request stream when routing already consumed it.
+async function handleDoctorWriteDiagnosis(req, res, session, providedBody) {
   if (!requireRole(res, session, ["doctor"])) return;
-  const body = await readJsonBody(req, res);
+  const body = providedBody || await readJsonBody(req, res);
   if (!body) return;
   const diagnosisPayload = validateDiagnosisPayload(body);
   if (!diagnosisPayload.ok) {
@@ -2197,9 +2228,10 @@ async function handleNurseAppointments(req, res, session) {
 }
 
 // Nurse writes medications (encrypted)
-async function handleNurseMedications(req, res, session) {
+// Accept an optional `providedBody` to avoid re-reading the request stream when routing already consumed it.
+async function handleNurseMedications(req, res, session, providedBody) {
   if (!requireRole(res, session, ["nurse"])) return;
-  const body = await readJsonBody(req, res);
+  const body = providedBody || await readJsonBody(req, res);
   if (!body) return;
   const medicationPayload = validateMedicationPayload(body);
   if (!medicationPayload.ok) {
@@ -2398,8 +2430,10 @@ async function requestHandler(req, res) {
 
   // --- CSRF Token Validation for state-changing requests ---
   // Exclude login and password reset endpoints from CSRF validation
+  // Exclude login, signup and password-reset endpoints from CSRF validation
   const csrfRequired = ["POST", "PUT", "DELETE"].includes(req.method)
     && pathname !== "/api/login"
+    && pathname !== "/api/signup"
     && !pathname.startsWith("/api/password-reset");
   if (csrfRequired) {
     const csrfToken = req.headers["x-csrf-token"] || (req.body && req.body.csrfToken);
@@ -2597,7 +2631,7 @@ async function requestHandler(req, res) {
       const body = await readJsonBody(req, res);
       const context = { patientId: body?.appointmentId ? db.prepare('SELECT patient_id FROM appointments WHERE id = ?').get(body.appointmentId)?.patient_id : null };
       if (!await requireAbac("write_diagnosis", context)) return;
-      return handleDoctorWriteDiagnosis(req, res, session);
+      return handleDoctorWriteDiagnosis(req, res, session, body);
     }
 
     // Nurse
@@ -2610,7 +2644,7 @@ async function requestHandler(req, res) {
       const body = await readJsonBody(req, res);
       const context = { patientId: body?.appointmentId ? db.prepare('SELECT patient_id FROM appointments WHERE id = ?').get(body.appointmentId)?.patient_id : null };
       if (!await requireAbac("write_medications", context)) return;
-      return handleNurseMedications(req, res, session);
+      return handleNurseMedications(req, res, session, body);
     }
 
     // 404
